@@ -14,7 +14,15 @@ with open("data/morcata.txt", "r", encoding="utf-8") as file:
         gender = parts[4].strip()
         try:
             date = datetime.strptime(date_str, "%Y-%m-%d")
-            print(f"Jméno: {name}, Hmotnost: {weight}, Cena: {price}, Datum narození: {date}, Pohlaví: {gender}")
+
+            if gender.lower() == "m":
+                gender = "sameček"
+            elif gender.lower() == "z":
+                gender = "samička"
+
+            print(f"{gender} morčete jménem: {name}\n- váží: {weight} g\n- datum narození: {date}")
+            print(f"- cena se slevou 10 %: {(price * Decimal('0.9'))} Kč")
+
         except ValueError:
             print(f"Invalid date format for line: {line.strip()}")
         
